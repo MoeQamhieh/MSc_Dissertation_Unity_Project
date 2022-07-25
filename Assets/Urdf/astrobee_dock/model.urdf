@@ -17,27 +17,49 @@
 <!-- implied. See the License for the specific language governing            -->
 <!-- permissions and limitations under the License.                          -->
 
-<robot name="handrail" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="dock" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <link name="body">
     <inertial>
       <mass value="20"/>
       <origin xyz="0 0 0"/>
       <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
     </inertial>
-    <visual name="body_visual">
+    <visual name="dock_body_visual">
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://astrobee_handrail_8_5/meshes/handrail_8_5.dae"/>
+        <mesh filename="package://astrobee_dock/meshes/dock_base.dae"/>
       </geometry>
     </visual>
-    <collision name="body_collision">
+    <visual name="dock_pins_visual">
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://astrobee_handrail_8_5/meshes/handrail_8_5.dae"/>
+        <mesh filename="package://astrobee_dock/meshes/dock_pins.dae"/>
       </geometry>
+    </visual>
+    <visual name="dock_target_visual">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://astrobee_dock/meshes/dock_target.dae"/>
+      </geometry>
+    </visual>
+    <visual name="dock_handles_visual">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://astrobee_dock/meshes/dock_handles.dae"/>
+      </geometry>
+    </visual>
+    <collision name="dock_body_collision">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://astrobee_dock/meshes/dock_base.dae"/>
+      </geometry>
+      <gazebo>
+        <surface>
+          <contact>
+            <collide_bitmask>0x02</collide_bitmask>
+          </contact>
+        </surface>
+      </gazebo>
     </collision>
   </link>
-  <gazebo>
-    <static>true</static>
-  </gazebo>
 </robot>
