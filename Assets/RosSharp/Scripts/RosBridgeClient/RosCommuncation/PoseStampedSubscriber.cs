@@ -1,7 +1,6 @@
 ﻿/*
 © Siemens AG, 2017-2018
 Author: Dr. Martin Bischoff (martin.bischoff@siemens.com)
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -17,12 +16,12 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class PoseStampedSubscriber : UnitySubscriber<MessageTypes.Geometry.Pose>
+    public class PoseStampedSubscriber : UnitySubscriber<MessageTypes.Geometry.PoseStamped>
     {
-        //public Transform PublishedTransform;
+        public Transform PublishedTransform;
 
-        public Vector3 position;
-        public Quaternion rotation;
+        private Vector3 position;
+        private Quaternion rotation;
         private bool isMessageReceived;
 
         protected override void Start()
@@ -36,7 +35,7 @@ namespace RosSharp.RosBridgeClient
                 ProcessMessage();
         }
 
-        protected override void ReceiveMessage(MessageTypes.Geometry.Pose message)
+        protected override void ReceiveMessage(MessageTypes.Geometry.PoseStamped message)
         {
             position = GetPosition(message).Ros2Unity();
             rotation = GetRotation(message).Ros2Unity();
@@ -45,25 +44,25 @@ namespace RosSharp.RosBridgeClient
 
         private void ProcessMessage()
         {
-            //PublishedTransform.position = position;
-            //PublishedTransform.rotation = rotation;
+            PublishedTransform.position = position;
+            PublishedTransform.rotation = rotation;
         }
 
-        private Vector3 GetPosition(MessageTypes.Geometry.Pose message)
+        private Vector3 GetPosition(MessageTypes.Geometry.PoseStamped message)
         {
             return new Vector3(
-                (float)message.position.x,
-                (float)message.position.y,
-                (float)message.position.z);
+                (float)message.pose.position.x,
+                (float)message.pose.position.y,
+                (float)message.pose.position.z);
         }
 
-        private Quaternion GetRotation(MessageTypes.Geometry.Pose message)
+        private Quaternion GetRotation(MessageTypes.Geometry.PoseStamped message)
         {
             return new Quaternion(
-                (float)message.orientation.x,
-                (float)message.orientation.y,
-                (float)message.orientation.z,
-                (float)message.orientation.w);
+                (float)message.pose.orientation.x,
+                (float)message.pose.orientation.y,
+                (float)message.pose.orientation.z,
+                (float)message.pose.orientation.w);
         }
     }
 }
