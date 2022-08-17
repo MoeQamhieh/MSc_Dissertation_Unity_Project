@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ThirdPersonView.unity
+    guid: f9573e08fe7112bb68e504a70ace152b
+  - enabled: 1
+    path: Assets/Scenes/AstrobeeView.unity
+    guid: f216fd5d511ef702db78a1a313a4d46e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 56c5c42b751b20e40b8e5b56ee95f804,
       type: 2}
