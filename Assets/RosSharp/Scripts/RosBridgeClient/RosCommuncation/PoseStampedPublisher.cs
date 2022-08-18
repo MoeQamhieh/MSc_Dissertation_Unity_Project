@@ -31,9 +31,10 @@ namespace RosSharp.RosBridgeClient
         {
             base.Start();
             InitializeMessage();
+            GetComponent<PoseStampedPublisher>().enabled = false;
         }
 
-        private void FixedUpdate()
+        private void OnEnable()
         {
             UpdateMessage();
         }
