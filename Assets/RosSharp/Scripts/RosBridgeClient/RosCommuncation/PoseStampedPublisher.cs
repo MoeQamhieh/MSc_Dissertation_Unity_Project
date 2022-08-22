@@ -31,11 +31,12 @@ namespace RosSharp.RosBridgeClient
         {
             base.Start();
             InitializeMessage();
-            GetComponent<PoseStampedPublisher>().enabled = false;
+            //GetComponent<PoseStampedPublisher>().enabled = false;
         }
 
         private void OnEnable()
         {
+            InitializeMessage();
             UpdateMessage();
         }
 
@@ -57,6 +58,9 @@ namespace RosSharp.RosBridgeClient
             GetGeometryQuaternion(PublishedTransform.rotation.Unity2Ros(), message.pose.orientation);
 
             Publish(message);
+
+            FrameId = "Unity";
+            GetComponent<PoseStampedPublisher>().enabled = false;
         }
 
         private static void GetGeometryPoint(Vector3 position, MessageTypes.Geometry.Point geometryPoint)
