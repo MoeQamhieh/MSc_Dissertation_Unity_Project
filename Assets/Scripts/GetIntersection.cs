@@ -10,6 +10,7 @@ namespace UnityEngine.XR.Interaction.Toolkit
     {
         public GameObject Controller;
         public GameObject TransformHandler;
+        public GameObject Origin;
         public PoseStampedPublisher posePublisher;
 
         Vector3 m_ReticlePos;
@@ -18,18 +19,13 @@ namespace UnityEngine.XR.Interaction.Toolkit
         // interface to get target point
         ILineRenderable lineRenderable;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
         void Awake()
         {
-            posePublisher.FrameId = "Unity";
+            //posePublisher.FrameId = "Unity";
             lineRenderable = Controller.GetComponent<ILineRenderable>();
-            Debug.Log("line: " + lineRenderable);
-            posePublisher.enabled = false;
+            TransformHandler = GameObject.Find("TransformHandler");
+            Origin.transform.position = TransformHandler.GetComponent<PositionSaving>().lastPosition;
+            //posePublisher.enabled = false;
         }
 
         public void FindPoint()
@@ -40,9 +36,10 @@ namespace UnityEngine.XR.Interaction.Toolkit
 
             m_ReticleNormal = m_ReticleNormal.normalized;
             TransformHandler.transform.position = new Vector3(m_ReticlePos.x + m_ReticleNormal.x * 1 , m_ReticlePos.y + m_ReticleNormal.y * 1 , m_ReticlePos.z + m_ReticleNormal.z * 1);
-            TransformHandler.transform.rotation = Quaternion.LookRotation(m_ReticleNormal, Vector3.up);
+            TransformHandler.transform.rotation = Quaternion.LookRotation(-m_ReticleNormal, Vector3.up);
             posePublisher.FrameId = "true";
-            posePublisher.enabled = true;
+            posePublisher.UpdateMessage();
+            //posePublisher.enabled = true;
         }
 
         // Update is called once per frame

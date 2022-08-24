@@ -796,12 +796,21 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Scene Switcher",
+                    "type": "Button",
+                    "id": "a1c47fd1-8706-4545-97c9-c396028bae19",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "1ce80054-410d-4112-a332-50faa7fb4f23",
+                    "id": "24b7ea77-daa2-40ea-89fd-356a8a70f14e",
                     "path": "<XRController>{RightHand}/gripPressed",
                     "interactions": "",
                     "processors": "",
@@ -974,6 +983,17 @@
                     "action": "Translate Anchor",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ad46d0b1-7766-46b5-ba33-47c208c27f57",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Scene Switcher",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

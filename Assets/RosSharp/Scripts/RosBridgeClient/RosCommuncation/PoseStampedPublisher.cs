@@ -23,7 +23,7 @@ namespace RosSharp.RosBridgeClient
     public class PoseStampedPublisher : UnityPublisher<MessageTypes.Geometry.PoseStamped>
     {
         public Transform PublishedTransform;
-        public string FrameId = "Unity";
+        public string FrameId = "true";
 
         private MessageTypes.Geometry.PoseStamped message;
 
@@ -34,10 +34,16 @@ namespace RosSharp.RosBridgeClient
             //GetComponent<PoseStampedPublisher>().enabled = false;
         }
 
-        private void OnEnable()
+        //private void OnEnable()
+        //{
+         //   base.Start();
+          //  InitializeMessage();
+           // UpdateMessage();
+        //}
+
+        private void FixedUpdate()
         {
-            InitializeMessage();
-            UpdateMessage();
+            //UpdateMessage();
         }
 
         private void InitializeMessage()
@@ -51,7 +57,7 @@ namespace RosSharp.RosBridgeClient
             };
         }
 
-        private void UpdateMessage()
+        public void UpdateMessage()
         {
             message.header.Update();
             GetGeometryPoint(PublishedTransform.position.Unity2Ros(), message.pose.position);
@@ -59,8 +65,8 @@ namespace RosSharp.RosBridgeClient
 
             Publish(message);
 
-            FrameId = "Unity";
-            GetComponent<PoseStampedPublisher>().enabled = false;
+            //FrameId = "Unity";
+            //GetComponent<PoseStampedPublisher>().enabled = false;
         }
 
         private static void GetGeometryPoint(Vector3 position, MessageTypes.Geometry.Point geometryPoint)
