@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class PositionSaving : MonoBehaviour
 {
-    public GameObject Origin;
+    //public GameObject Origin;
     public Vector3 lastPosition;
 
     void Awake() 
     {
-        Origin = GameObject.Find("XR Origin");
-        lastPosition = Origin.transform.position;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this.gameObject);
+        lastPosition = new Vector3(9.89f, 5.77f, 10.97f);
+        //Origin = GameObject.Find("XR Origin");
+        //lastPosition = Origin.transform.position;
     }
 
 }

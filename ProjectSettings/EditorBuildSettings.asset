@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Tutorial Scene.unity
+    guid: 086a8853c422f5446b05369da250ae64
+  - enabled: 1
     path: Assets/Scenes/ThirdPersonView.unity
     guid: f9573e08fe7112bb68e504a70ace152b
   - enabled: 1

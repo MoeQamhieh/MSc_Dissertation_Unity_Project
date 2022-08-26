@@ -14,7 +14,7 @@ public class ChangeScene : MonoBehaviour
 
     public void MoveToScene(int sceneID)
     {
-        transformHandler.GetComponent<PositionSaving>().lastPosition = transformHandler.GetComponent<PositionSaving>().Origin.transform.position;
+        transformHandler.GetComponent<PositionSaving>().lastPosition = GameObject.Find("XR Origin").transform.position;
         SceneManager.LoadScene(sceneID);
     }
 

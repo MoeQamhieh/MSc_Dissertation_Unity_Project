@@ -7,14 +7,21 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
     public InputActionReference toggleChangeScene = null;
-    private int toGoScene = 1;
+    public GameObject transformHandler;
+
+    private int toGoScene = 2;
 
     void Awake()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 1)
+        transformHandler = GameObject.Find("TransformHandler");
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            toGoScene = 0;
+            toGoScene = 1;
+        } else if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            GameObject.Find("XR Origin").transform.position = transformHandler.GetComponent<PositionSaving>().lastPosition;
         }
+        
         toggleChangeScene.action.started += ChangeScene;
     }
 
@@ -25,6 +32,11 @@ public class SceneSwitcher : MonoBehaviour
 
     public void ChangeScene(InputAction.CallbackContext context)
     {
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            transformHandler.GetComponent<PositionSaving>().lastPosition = GameObject.Find("XR Origin").transform.position;
+        }
+        
         SceneManager.LoadScene(toGoScene);
     }
 }
